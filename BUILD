@@ -24,7 +24,7 @@ py_wheel(
         "//src/py/_tesseract_py_util:_tesseract_py_util",
         ":package_data",
     ],
-    version = "$(VERSION)",
+    version = "1.0.0",
     requires=[
         "numpy",
         "scipy",
