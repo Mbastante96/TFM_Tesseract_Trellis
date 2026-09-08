@@ -1,0 +1,14 @@
+Maquina,Experimento,Circuito,Beam,Threads,Repeticiones,Tiempo_Medio_s,Desviacion_s,Estados_Expandidos,Estados_Fusionados,Max_Frontera,Errores_Logicos,LER
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",64,1,3,160.6373,6.5222,2190597,2190596,180,0,0.0
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",256,1,3,663.041,7.6039,8755494,8755493,180,0,0.0
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",1024,1,3,2749.191,43.6448,34885780,34885779,180,0,0.0
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",2048,1,3,5599.8452,41.4439,71611367,71611367,180,0,0.0
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,1,3,2699.2132,46.9494,35812799,35812799,180,0,0.0
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,2,3,1613.4754,17.5915,35036486,35036485,180,0,0.0
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,4,3,1122.0243,49.3989,35059576,35059575,180,0,0.0
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,8,3,894.3404,19.0061,34787333,34787332,180,0,0.0
+ThinkPad_i5,Exp4_Barrido_Ruido,"r=6,d=6,p=0.001,nois",1024,1,3,1236.6848,7.9217,16550808,16550808,144,0,0.0
+ThinkPad_i5,Exp4_Barrido_Ruido,"r=6,d=6,p=0.005,nois",1024,1,3,1218.1763,12.0008,16552766,16552766,144,0,0.0
+ThinkPad_i5,Exp4_Barrido_Ruido,"r=6,d=6,p=0.009,nois",1024,1,3,1218.9204,11.3062,15999976,15999975,144,0,0.0
+ThinkPad_i5,Exp1_Escalabilidad,"r=6,d=6,p=0.001,nois",1024,1,3,1279.3549,34.228,16551544,16551544,144,0,0.0
+ThinkPad_i5,Exp1_Escalabilidad,"r=10,d=10,p=0.001,no",1024,1,3,2757.4254,37.1745,35799179,35799179,180,0,0.0

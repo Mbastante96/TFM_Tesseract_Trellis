@@ -1,0 +1,14 @@
+Maquina,Experimento,Circuito,Beam,Threads,Pico_RAM_MB
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",64,1,143.28
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",256,1,143.28
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",1024,1,143.28
+ThinkPad_i5,Exp2_Frontera,"r=10,d=10,p=0.001,no",2048,1,143.28
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,1,143.28
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,2,143.28
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,4,143.28
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,8,143.28
+ThinkPad_i5,Exp4_Barrido_Ruido,"r=6,d=6,p=0.001,nois",1024,1,57.2
+ThinkPad_i5,Exp4_Barrido_Ruido,"r=6,d=6,p=0.005,nois",1024,1,57.2
+ThinkPad_i5,Exp4_Barrido_Ruido,"r=6,d=6,p=0.009,nois",1024,1,57.21
+ThinkPad_i5,Exp1_Escalabilidad,"r=6,d=6,p=0.001,nois",1024,1,57.2
+ThinkPad_i5,Exp1_Escalabilidad,"r=10,d=10,p=0.001,no",1024,1,143.28

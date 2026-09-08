@@ -1,0 +1,2 @@
+--- TEST SÍNDROME AMBIGUO ---
+num_shots = 1 num_low_confidence = 0 total_time_seconds = 2.3e-05

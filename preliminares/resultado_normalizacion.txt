@@ -1,0 +1,13 @@
+=========================================================
+  TEST DE CONSISTENCIA DE NORMALIZACIÓN DE MASAS
+=========================================================
+
+--- Ejecución 1: Sin poda efectiva (Beam gigante: 10000) ---
+num_shots = 1000 num_low_confidence = 0 total_time_seconds = 170799.4316339999
+
+--- Ejecución 2: Poda extrema (Beam minúsculo: 2) ---
+num_shots = 1000 num_low_confidence = 324 total_time_seconds = 14.29939199999999
+
+=========================================================
+  TEST FINALIZADO
+=========================================================

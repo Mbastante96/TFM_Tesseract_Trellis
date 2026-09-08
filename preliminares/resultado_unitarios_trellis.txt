@@ -1,0 +1,68 @@
+=========================================================
+  PRUEBAS UNITARIAS DE TESSERACT TRELLIS
+=========================================================
+
+Fecha de ejecución: 2026-09-08T19:03:50+00:00
+Directorio: /app/preliminares
+Objetivo Bazel: //src:tesseract_trellis_tests
+
+Starting local Bazel server (9.2.0) and connecting to it...
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+    currently loading: src
+Analyzing: target //src:tesseract_trellis_tests (1 packages loaded)
+Analyzing: target //src:tesseract_trellis_tests (5 packages loaded, 6 targets configured)
+Analyzing: target //src:tesseract_trellis_tests (5 packages loaded, 7 targets configured)
+
+Analyzing: target //src:tesseract_trellis_tests (21 packages loaded, 16 targets configured)
+
+Analyzing: target //src:tesseract_trellis_tests (78 packages loaded, 860 targets configured)
+
+Analyzing: target //src:tesseract_trellis_tests (90 packages loaded, 1847 targets configured)
+
+INFO: Analyzed target //src:tesseract_trellis_tests (91 packages loaded, 2056 targets configured).
+[136 / 137] Testing //src:tesseract_trellis_tests; 0s processwrapper-sandbox
+INFO: From Testing //src:tesseract_trellis_tests:
+==================== Test output for //src:tesseract_trellis_tests:
+Running main() from gmock_main.cc
+[==========] Running 7 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 7 tests from TesseractTrellisDecoderTest
+[ RUN      ] TesseractTrellisDecoderTest.ComputesObservableProbabilityForAmbiguousSyndrome
+[       OK ] TesseractTrellisDecoderTest.ComputesObservableProbabilityForAmbiguousSyndrome (0 ms)
+[ RUN      ] TesseractTrellisDecoderTest.SumsProbabilityMassAcrossMultipleExplanations
+[       OK ] TesseractTrellisDecoderTest.SumsProbabilityMassAcrossMultipleExplanations (0 ms)
+[ RUN      ] TesseractTrellisDecoderTest.ReportsNanProbabilityForInvalidDetector
+[       OK ] TesseractTrellisDecoderTest.ReportsNanProbabilityForInvalidDetector (0 ms)
+[ RUN      ] TesseractTrellisDecoderTest.RankingModesDecodeAmbiguousSyndrome
+[       OK ] TesseractTrellisDecoderTest.RankingModesDecodeAmbiguousSyndrome (0 ms)
+[ RUN      ] TesseractTrellisDecoderTest.BeamEpsSmokeTest
+[       OK ] TesseractTrellisDecoderTest.BeamEpsSmokeTest (0 ms)
+[ RUN      ] TesseractTrellisDecoderTest.MergeErrorsMatchesOtherDecoders
+[       OK ] TesseractTrellisDecoderTest.MergeErrorsMatchesOtherDecoders (0 ms)
+[ RUN      ] TesseractTrellisDecoderTest.RejectsMoreThanOneObservable
+[       OK ] TesseractTrellisDecoderTest.RejectsMoreThanOneObservable (0 ms)
+[----------] 7 tests from TesseractTrellisDecoderTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 7 tests from 1 test suite ran. (2 ms total)
+[  PASSED  ] 7 tests.
+================================================================================
+INFO: Found 1 test target...
+Target //src:tesseract_trellis_tests up-to-date:
+  ../bazel-bin/src/tesseract_trellis_tests
+INFO: Elapsed time: 18.865s, Critical Path: 0.37s
+INFO: 2 processes: 135 action cache hit, 1 internal, 1 processwrapper-sandbox.
+INFO: Build completed successfully, 2 total actions
+//src:tesseract_trellis_tests                                            PASSED in 0.1s
+
+Executed 1 out of 1 test: 1 test passes.
+There were tests whose specified size is too big. Use the --test_verbose_timeout_warnings command line option to see which ones these are.
+
+=========================================================
+RESULTADO: TODAS LAS PRUEBAS HAN FINALIZADO CORRECTAMENTE
+Código de retorno de Bazel: 0
+Resultado guardado en: /app/preliminares/resultado_unitarios_trellis.txt
+=========================================================
