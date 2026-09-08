@@ -1,3 +1,11 @@
+# Master's Thesis Repository
+
+This repository contains a research-oriented version of the original **Tesseract Decoder** project, extended to support the development of the Master's Thesis *"Algorithmic Characterization of the Tesseract Trellis Decoder for Quantum Error Correction"*.
+
+The repository includes additional code developed to perform validation tests, experimental campaigns, performance measurements, and reproducible evaluations of the decoder. These modifications were introduced exclusively for research purposes and do not form part of the official upstream implementation.
+
+The original project can be found in the Quantumlib Tesseract Decoder repository.
+
 <div align="center">
 
 <p align="center">
