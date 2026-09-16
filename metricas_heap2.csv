@@ -1,0 +1,4 @@
+Maquina,Experimento,Circuito,Beam,Threads,Pico_Heap_MiB
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,2,189.65
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,4,396.78
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,8,498.19

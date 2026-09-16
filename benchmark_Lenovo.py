@@ -10,7 +10,7 @@ import re
 # CONFIGURACIÓN GENERAL
 # ==========================================
 CSV_TIEMPOS = "metricas_tiempos.csv"
-CSV_RAM = "metricas_ram.csv"
+CSV_HEAP = "metricas_heap.csv"
 MASSIF_FILE = "massif.out.tmp"
 BINARY_PATH = "./bazel-bin/src/tesseract_trellis"
 
@@ -19,11 +19,11 @@ def init_csvs():
         with open(CSV_TIEMPOS, mode='w', newline='') as f:
             csv.writer(f).writerow(["Maquina", "Experimento", "Circuito", "Beam", "Threads", "Repeticiones", 
                                     "Tiempo_Medio_s", "Desviacion_s", "Estados_Expandidos", 
-                                    "Estados_Fusionados", "Max_Frontera", "Errores_Logicos", "LER"])
+                                    "Estados_Retenidos", "Max_Frontera", "Errores_Logicos", "LER"])
             
-    if not os.path.exists(CSV_RAM):
-        with open(CSV_RAM, mode='w', newline='') as f:
-            csv.writer(f).writerow(["Maquina", "Experimento", "Circuito", "Beam", "Threads", "Pico_RAM_MB"])
+    if not os.path.exists(CSV_HEAP):
+        with open(CSV_HEAP, mode='w', newline='') as f:
+            csv.writer(f).writerow(["Maquina", "Experimento", "Circuito", "Beam", "Threads", "Pico_Heap_MiB"])
 
 def parse_massif_peak(filename):
     max_bytes = 0
@@ -52,7 +52,7 @@ def buscar_circuito(r, d, p, nkd_interior):
     return None
 
 def run_full_benchmark(maquina, experimento, filepath_circuito, beam_size, threads, shots=1000, repeticiones=3):
-    """Ejecuta un benchmark completo: mide tiempo, métricas internas y consumo de RAM."""
+    """Ejecuta un benchmark completo: mide tiempo, métricas internas y pico Heap."""
     if not filepath_circuito or not os.path.exists(filepath_circuito):
         print(f"ERROR: No se encontró el circuito: {filepath_circuito}")
         return
@@ -111,7 +111,7 @@ def run_full_benchmark(maquina, experimento, filepath_circuito, beam_size, threa
         result = subprocess.run(comando_tiempo, capture_output=True, text=True)
         
         if result.returncode != 0:
-            print(f"  ❌ ERROR CRÍTICO EN C++:")
+            print(f"ERROR CRÍTICO EN C++:")
             print(result.stderr.strip())
             return
             
@@ -123,7 +123,7 @@ def run_full_benchmark(maquina, experimento, filepath_circuito, beam_size, threa
 
     # Parsear resultados de la caja negra
     estados_expandidos = int(re.search(r"states_expanded = (\d+)", output_str).group(1)) if re.search(r"states_expanded = (\d+)", output_str) else 0
-    estados_fusionados = int(re.search(r"states_merged = (\d+)", output_str).group(1)) if re.search(r"states_merged = (\d+)", output_str) else 0
+    estados_retenidos = int(re.search(r"states_merged = (\d+)", output_str).group(1)) if re.search(r"states_merged = (\d+)", output_str) else 0
     max_frontera = int(re.search(r"frontier_width = (\d+)", output_str).group(1)) if re.search(r"frontier_width = (\d+)", output_str) else 0
     errores_logicos = int(re.search(r"num_errors = (\d+)", output_str).group(1)) if re.search(r"num_errors = (\d+)", output_str) else 0
     ler = errores_logicos / shots
@@ -131,27 +131,27 @@ def run_full_benchmark(maquina, experimento, filepath_circuito, beam_size, threa
     with open(CSV_TIEMPOS, mode='a', newline='') as f:
         csv.writer(f).writerow([maquina, experimento, base_name[:20], beam_size, threads, repeticiones, 
                                 round(t_medio, 4), round(desviacion, 4), 
-                                estados_expandidos, estados_fusionados, max_frontera, errores_logicos, ler])
+                                estados_expandidos, estados_retenidos, max_frontera, errores_logicos, ler])
     print(f"  -> Tiempo: {t_medio:.4f}s | Frontera Max: {max_frontera} | LER: {ler:.4f}")
 
     # -------------------------------------------------------------------------
-    # 4. FASE ESPACIAL (VALGRIND MASSIF - RAM)
+    # 4. FASE ESPACIAL (VALGRIND MASSIF)
     # -------------------------------------------------------------------------
-    comando_ram = [
+    comando_heap = [
         "valgrind", "--tool=massif", f"--massif-out-file={MASSIF_FILE}",
         BINARY_PATH, 
         "--dem", dem_file, "--in", shots_10_file, "--in-format", "b8",
-        "--beam", str(beam_size), "--threads", "1"
+        "--beam", str(beam_size), "--threads", str(threads)
     ]
     
-    subprocess.run(comando_ram, capture_output=True)
-    pico_mb = parse_massif_peak(MASSIF_FILE)
+    subprocess.run(comando_heap, capture_output=True)
+    pico_heap_mib = parse_massif_peak(MASSIF_FILE)
     if os.path.exists(MASSIF_FILE):
         os.remove(MASSIF_FILE)
         
-    with open(CSV_RAM, mode='a', newline='') as f:
-        csv.writer(f).writerow([maquina, experimento, base_name[:20], beam_size, threads, round(pico_mb, 2)])
-    print(f"  -> Memoria (Pico RAM): {pico_mb:.2f} MB")
+    with open(CSV_HEAP, mode='a', newline='') as f:
+        csv.writer(f).writerow([maquina, experimento, base_name[:20], beam_size, threads, round(pico_heap_mib, 2)])
+    print(f"  -> Memoria (Pico heap): {pico_heap_mib:.2f} MiB")
 
     # Limpieza de archivos temporales
     for file_to_delete in [dem_file, shots_1000_file, obs_1000_file, shots_10_file, out_file]:
@@ -175,6 +175,9 @@ if __name__ == "__main__":
 
     print("=== INICIANDO VALIDACIÓN TFM ===")
 
+    # Exp 1: Escalabilidad del problema (Variando distancia d <= 10)
+    for circuito in CIRCUITOS_ESCALABILIDAD:
+        run_full_benchmark(MAQUINA, "Exp1_Escalabilidad", filepath_circuito=circuito, beam_size=1024, threads=1, repeticiones=3)
     
     # Exp 2: Coste de la Frontera (Impacto del Beam Size)
     if CIRCUITO_BASE:
@@ -193,8 +196,4 @@ if __name__ == "__main__":
         if circuito_ruido:
             run_full_benchmark(MAQUINA, "Exp4_Barrido_Ruido", filepath_circuito=circuito_ruido, beam_size=1024, threads=1, repeticiones=3)
 
-    # Exp 1: Escalabilidad del problema (Variando distancia d <= 10)
-    for circuito in CIRCUITOS_ESCALABILIDAD:
-        run_full_benchmark(MAQUINA, "Exp1_Escalabilidad", filepath_circuito=circuito, beam_size=1024, threads=1, repeticiones=3)
-
-    print("\n¡Pruebas finalizadas con éxito! Revisa metricas_tiempos.csv y metricas_ram.csv")
+    print("\nCampaña finalizada. Revisa metricas_tiempos.csv, metricas_heap.csv y los avisos de ejecución.")

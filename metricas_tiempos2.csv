@@ -1,0 +1,4 @@
+Maquina,Experimento,Circuito,Beam,Threads,Repeticiones,Tiempo_Medio_s,Desviacion_s,Estados_Expandidos,Estados_Retenidos,Max_Frontera,Errores_Logicos,LER
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,2,3,4011.5297,194.7378,35810754,35810754,180,0,0.0
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,4,3,3147.0843,72.8878,35810236,35810236,180,0,0.0
+ThinkPad_i5,Exp3_Paralelismo,"r=10,d=10,p=0.001,no",1024,8,3,2803.871,88.1099,35812380,35812380,180,0,0.0
